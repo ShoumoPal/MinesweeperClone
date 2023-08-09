@@ -17,9 +17,12 @@ class MineSweeperGame {
 private:
 	int side;
 	int mines;
-	char board[][MAXSIDE];
+	char myBoard[MAXSIDE][MAXSIDE];
+	char realBoard[MAXSIDE][MAXSIDE];
+	int mine[MAXMINES][2];
 
 public:
+
 	// Function to validate user input
 	bool isValid(int _row, int _col) {
 		return (((_row >= 0) && (_row < side)) && (_col >= 0) && (_col < side));
@@ -68,10 +71,75 @@ public:
 		}
 	}
 	// Function to initialize the boards
-	void InitializeBoards(char realBoard[][MAXSIDE], char myBoard[][MAXSIDE]) {
+	void InitializeBoards() {
 		for (int i = 0; i < side; i++) {
 			for (int j = 0; j < side; j++) {
 				myBoard[i][j] = realBoard[i][j] = '-';
+			}
+		}
+	}
+	// Function for placing mines
+	void PlaceMines() {
+		bool mark[MAXSIDE * MAXSIDE];
+		memset(mark, false, sizeof(mark));
+
+		int i = 0;
+		while (i < mines) {
+			int random = rand() % (side * side);
+			int x = random / side;
+			int y = random % side;
+
+			if (mark[random] == false) {
+				mine[i][0] = x;
+				mine[i][1] = y;
+				realBoard[mine[i][0]][mine[i][1]] = '*';
+				mark[random] = true;
+				i++;
+			}
+		}
+	}
+	// Function for counting adjacent mines
+	int CountAdjacentMines(int row, int col) {
+		int count = 0;
+
+		if (isValid(row, col - 1)) {
+			if (isMine(row, col - 1, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row, col + 1)) {
+			if (isMine(row, col + 1, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row + 1, col)) {
+			if (isMine(row + 1, col, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row - 1, col)) {
+			if (isMine(row - 1, col, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row - 1, col - 1)) {
+			if (isMine(row - 1, col - 1, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row + 1, col + 1)) {
+			if (isMine(row + 1, col + 1, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row + 1, col - 1)) {
+			if (isMine(row + 1, col - 1, realBoard)) {
+				count++;
+			}
+		}
+		if (isValid(row - 1, col + 1)) {
+			if (isMine(row - 1, col + 1, realBoard)) {
+				count++;
 			}
 		}
 	}
@@ -79,14 +147,14 @@ public:
 	void PlayMineSweeper() {
 		bool gameOver = false;
 
-		char realBoard[MAXSIDE][MAXSIDE], myBoard[MAXSIDE][MAXSIDE];
-
 		int movesLeft = side * side - mines;
 		int x, y;
 
 		int mines[MAXMINES][2]; //For storing coordinates of all the mines
 
-		InitializeBoards(realBoard, myBoard);
+		InitializeBoards();
+
+		PlaceMines();
 
 		printBoard(myBoard);
 	}
