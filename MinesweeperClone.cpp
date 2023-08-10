@@ -23,6 +23,18 @@ private:
 
 public:
 
+	// Function for introduction message
+	void GameIntro() {
+		cout << "========================================" << endl;
+		cout << "||                                    || " << endl;
+		cout << "||            MINESWEEPER             || " << endl;
+		cout << "||                                    || " << endl;
+		cout << "========================================\n" << endl;
+
+		cout << "Rules: " << endl;
+		cout << "1. Board is divided into cells with mines randomly distributed\n2. To win, you will need to open all cells without triggering the mines\n3. Number on the cell denotes the number of mines adjacent to it\n4. Contains 3 diificulty levels\n5. Have fun and enjoy!\n" << endl;
+		cout << "----------------------------------------" << endl;
+	}
 	// Function to validate user input
 	bool isValid(int _row, int _col) {
 		return (((_row >= 0) && (_row < side)) && (_col >= 0) && (_col < side));
@@ -45,6 +57,7 @@ public:
 			}
 			cout << endl;
 		}
+		cout << "----------------------------------------" << endl;
 	}	
 	// For choosing difficulty level
 	void ChooseDifficulty() {
@@ -277,6 +290,7 @@ public:
 };
 int main() {
 	MineSweeperGame game;
+	game.GameIntro();
 	game.ChooseDifficulty();
 	game.PlayMineSweeper();
 	return 0;
