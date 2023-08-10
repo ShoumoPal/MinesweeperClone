@@ -142,6 +142,77 @@ public:
 				count++;
 			}
 		}
+		return count;
+	}
+	// Function for gameloop
+	bool Gameloop(int row, int col, int *movesLeft) {
+		// Base case
+		if (myBoard[row][col] != '-')
+			return false;
+
+		if (realBoard[row][col] == '*') {
+			myBoard[row][col] = '*';
+
+			for (int i = 0; i < mines; i++) {
+				myBoard[mine[i][0]][mine[i][1]] = '*';
+			}
+
+			printBoard(myBoard);
+			cout << "You lost!" << endl;
+			return true;
+		}
+		else
+		{
+			int count = CountAdjacentMines(row, col);
+			(*movesLeft)--;
+
+			myBoard[row][col] = count + '0';
+
+			// If no mines are nearby, we recur for all adjacent 8 cells
+			if (!count) {
+
+				if (isValid(row, col - 1)) {
+					if (isMine(row, col, realBoard) == false) {
+						Gameloop(row, col - 1, movesLeft);
+					}
+				}
+				if (isValid(row, col + 1)) {
+					if (isMine(row, col + 1, realBoard) == false) {
+						Gameloop(row, col + 1, movesLeft);
+					}
+				}
+				if (isValid(row + 1, col)) {
+					if (isMine(row + 1, col, realBoard) == false) {
+						Gameloop(row + 1, col, movesLeft);
+					}
+				}
+				if (isValid(row - 1, col)) {
+					if (isMine(row - 1, col, realBoard) == false) {
+						Gameloop(row - 1, col, movesLeft);
+					}
+				}
+				if (isValid(row - 1, col + 1)) {
+					if (isMine(row - 1, col + 1, realBoard) == false) {
+						Gameloop(row - 1, col + 1, movesLeft);
+					}
+				}
+				if (isValid(row - 1, col - 1)) {
+					if (isMine(row - 1, col - 1, realBoard) == false) {
+						Gameloop(row - 1, col - 1, movesLeft);
+					}
+				}
+				if (isValid(row + 1, col - 1)) {
+					if (isMine(row + 1, col - 1, realBoard) == false) {
+						Gameloop(row + 1, col - 1, movesLeft);
+					}
+				}
+				if (isValid(row + 1, col + 1)) {
+					if (isMine(row + 1, col + 1, realBoard) == false) {
+						Gameloop(row + 1, col + 1, movesLeft);
+					}
+				}
+			}
+		}
 	}
 	// Function for gameplay
 	void PlayMineSweeper() {
