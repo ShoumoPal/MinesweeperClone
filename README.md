@@ -4,8 +4,7 @@
 
 <hr>
 
-<img src = "https://github.com/ShoumoPal/MinesweeperClone/assets/46050414/f7475ca5-8636-46f3-be3c-7f5385bbba12" width = 50% height = 50% />
-<img src = "https://github.com/ShoumoPal/MinesweeperClone/assets/46050414/1c31cdb6-196f-4d83-9aa9-5d282aaf336e" width = 50% height = 50% />
+<img src = "https://github.com/ShoumoPal/MinesweeperClone/assets/46050414/5ee06d02-71df-4291-a9d2-bd5db1cdd0f5" width = 50% height = 50% />
 <img src = "https://github.com/ShoumoPal/MinesweeperClone/assets/46050414/22c00cff-dfd2-4c99-8a99-77c74757cc9d" width = 50% height = 50% />
 
 <br>
