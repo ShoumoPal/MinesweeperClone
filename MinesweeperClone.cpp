@@ -82,6 +82,7 @@ public:
 	void PlaceMines() {
 		bool mark[MAXSIDE * MAXSIDE];
 		memset(mark, false, sizeof(mark));
+		srand(time(0));
 
 		int i = 0;
 		while (i < mines) {
@@ -212,6 +213,34 @@ public:
 					}
 				}
 			}
+			return false;
+		}
+	}
+	//Function to make a move
+	void MakeAMove(int* x, int* y) {
+		cout << "Enter the x and y co-ordinates: " << endl;
+		cin >> *x >> *y;
+	}
+	// Function to find mine index
+	int FindMineIndex(int row, int col) {
+		for (int i = 0; i < mines; i++) {
+			if (mine[i][0] == row && mine[i][1] == col)
+				return i;
+		}
+	}
+	// Function to replace mine
+	void ReplaceMine(int row, int col) {
+		for (int i = 0; i < side; i++) {
+			for (int j = 0; j < side; j++) {
+				if (realBoard[i][j] != '*') {
+					realBoard[i][j] = '*';
+					int mineIndex = FindMineIndex(row, col);
+					mine[mineIndex][0] = i;
+					mine[mineIndex][1] = j;
+					realBoard[row][col] = '-';
+					return;
+				}
+			}
 		}
 	}
 	// Function for gameplay
@@ -221,13 +250,29 @@ public:
 		int movesLeft = side * side - mines;
 		int x, y;
 
-		int mines[MAXMINES][2]; //For storing coordinates of all the mines
-
 		InitializeBoards();
 
 		PlaceMines();
 
-		printBoard(myBoard);
+		int moveIndex = 0;
+		while (!gameOver) {
+			cout << "Current board status: " << endl;
+			printBoard(myBoard);
+			MakeAMove(&x, &y);
+
+			// If the first move is a mine
+			if (moveIndex == 0 && isMine(x, y, realBoard))
+				ReplaceMine(x, y);
+
+			moveIndex++;
+
+			gameOver = Gameloop(x, y, &movesLeft);
+
+			if (!gameOver && movesLeft == 0) {
+				cout << "You won!" << endl;
+				gameOver = true;
+			}
+		}
 	}
 };
 int main() {
