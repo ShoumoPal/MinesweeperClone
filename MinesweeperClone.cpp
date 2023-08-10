@@ -66,7 +66,7 @@ public:
 		cout << "Enter the difficulty level: " << endl;
 		cout << "Enter '0' for Easy( 9x9 board with 10 mines )" << endl;
 		cout << "Enter '1' for Intermediate( 16x16 board with 40 mines )" << endl;
-		cout << "Enter '2' for Easy( 24x24 board with 99 mines )" << endl;
+		cout << "Enter '2' for Hard( 24x24 board with 99 mines )" << endl;
 
 		cin >> level;
 
