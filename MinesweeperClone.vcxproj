@@ -127,7 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MinesweeperClone.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Difficulty.h" />
+    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
